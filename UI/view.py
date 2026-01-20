@@ -32,8 +32,9 @@ class View:
         # TODO
 
         # Riga 1
-        self.dd_anno = ft.Dropdown(label="Anno", width=200, alignment=ft.alignment.top_left)
-
+        self.dd_anno = ft.Dropdown(label="Anno", width=200, alignment=ft.alignment.top_left,
+                                   on_change=lambda e:self.controller.handle_on_change_squadre(self.dd_anno.value))
+        self.controller.popola_dd_anno()
         row1 = ft.Row([ft.Container(self.txt_titolo, width=500),
                                ft.Container(None, width=0),
                                ft.Container(self.dd_anno, width=250)],
@@ -41,17 +42,17 @@ class View:
 
         # Riga 2
         self.txt_out_squadre = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=False)
-        cont = ft.Container(self.txt_out_squadre, width=300, height=200, alignment=ft.alignment.top_left,
-                            bgcolor="#deeded")
-        self.pulsante_crea_grafo = ft.ElevatedButton(text="Crea Grafo", on_click=self.controller.handle_crea_grafo)
+        cont = ft.Container(self.txt_out_squadre, width=300, height=200, alignment=ft.alignment.top_left)
+        self.pulsante_crea_grafo = ft.ElevatedButton(text="Crea Grafo", on_click=self.controller.handle_crea_grafo, disabled=True)
         row2 = ft.Row([cont, self.pulsante_crea_grafo],
                       alignment=ft.MainAxisAlignment.CENTER,
                       vertical_alignment=ft.CrossAxisAlignment.END)
 
         # Riga 3
-        self.dd_squadra = ft.Dropdown(label="Squadra", width=200)
-        self.pulsante_dettagli = ft.ElevatedButton(text="Dettagli", on_click=self.controller.handle_dettagli)
-        self.pulsante_percorso = ft.ElevatedButton(text="Percorso", on_click=self.controller.handle_percorso)
+        self.dd_squadra = ft.Dropdown(label="Squadra", width=200, disabled=True)
+        self.pulsante_dettagli = ft.ElevatedButton(text="Dettagli", on_click=self.controller.handle_dettagli,
+                                                   disabled=True)
+        self.pulsante_percorso = ft.ElevatedButton(text="Percorso", on_click=self.controller.handle_percorso, disabled=True)
         row3 = ft.Row([ft.Container(self.dd_squadra, width=250),
                                ft.Container(self.pulsante_dettagli, width=250),
                                ft.Container(self.pulsante_percorso, width=250)],

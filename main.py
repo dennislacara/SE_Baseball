@@ -4,7 +4,7 @@ from model.model import Model
 from UI.view import View
 from UI.controller import Controller
 
-
+#16.41 ->
 def main(page: ft.Page):
     my_model = Model()
     my_view = View(page)
