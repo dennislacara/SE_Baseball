@@ -1,6 +1,7 @@
 import flet as ft
 from UI.alert import AlertManager
 
+
 class View:
     def __init__(self, page: ft.Page):
         # Page
@@ -32,8 +33,8 @@ class View:
         # TODO
 
         # Riga 1
-        self.dd_anno = ft.Dropdown(label="Anno", width=200, alignment=ft.alignment.top_left)
-
+        self.dd_anno = ft.Dropdown(label="Anno", width=200, alignment=ft.alignment.top_left, on_change=self.controller.handle_on_change_year)
+        self.controller.populate_dd_anno()
         row1 = ft.Row([ft.Container(self.txt_titolo, width=500),
                                ft.Container(None, width=0),
                                ft.Container(self.dd_anno, width=250)],
@@ -41,8 +42,7 @@ class View:
 
         # Riga 2
         self.txt_out_squadre = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=False)
-        cont = ft.Container(self.txt_out_squadre, width=300, height=200, alignment=ft.alignment.top_left,
-                            bgcolor="#deeded")
+        cont = ft.Container(self.txt_out_squadre, width=300, height=200, alignment=ft.alignment.top_left,)
         self.pulsante_crea_grafo = ft.ElevatedButton(text="Crea Grafo", on_click=self.controller.handle_crea_grafo)
         row2 = ft.Row([cont, self.pulsante_crea_grafo],
                       alignment=ft.MainAxisAlignment.CENTER,
