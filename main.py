@@ -18,5 +18,5 @@ def main(page: ft.Page):
 ft.app(
     target=main,
     host="0.0.0.0",
-    port=int(os.environ.get("dennis_prova", 0-65535)),
+    port=int(os.environ.get("PORT", 8000)),
 )
