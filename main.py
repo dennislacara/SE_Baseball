@@ -1,3 +1,5 @@
+import os
+
 import flet as ft
 
 from model.model import Model
@@ -13,5 +15,8 @@ def main(page: ft.Page):
     my_view.set_controller(my_controller)
     my_view.load_interface()
 
-
-ft.app(target=main)
+ft.app(
+    target=main,
+    host="0.0.0.0",
+    port=int(os.environ.get("dennis_prova", 22082004)),
+)
