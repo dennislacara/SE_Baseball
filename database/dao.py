@@ -1,3 +1,4 @@
+from psycopg2.extras import RealDictCursor
 from database.DB_connect import DBConnect
 from model.team import Team
 from model.archi import Arco
@@ -11,7 +12,7 @@ class DAO:
             return
         result = []
 
-        cursor = conn.cursor(dictionary=True)
+        cursor = conn.cursor(cursor_factory=RealDictCursor)
         query = """ SELECT * FROM esempio """
 
         try:
@@ -24,7 +25,7 @@ class DAO:
             result = None
         finally:
             cursor.close()
-            conn.close()
+            DBConnect.release_connection(conn)
         return result
 
     @staticmethod
@@ -35,7 +36,7 @@ class DAO:
             return
         result = []
 
-        cursor = conn.cursor(dictionary=True)
+        cursor = conn.cursor(cursor_factory=RealDictCursor)
         query = """ SELECT id ,year ,team_code, name FROM team WHERE year >=1980 """
 
         try:
@@ -50,7 +51,7 @@ class DAO:
             result = None
         finally:
             cursor.close()
-            conn.close()
+            DBConnect.release_connection(conn)
         return result
 
     @staticmethod
@@ -61,7 +62,7 @@ class DAO:
             return
         result = []
 
-        cursor = conn.cursor(dictionary=True)
+        cursor = conn.cursor(cursor_factory=RealDictCursor)
         query = """ with tab as(
                     select s.team_id , sum(s.salary) as total_salary
                     from salary s 
@@ -92,5 +93,5 @@ class DAO:
             result = None
         finally:
             cursor.close()
-            conn.close()
+            DBConnect.release_connection(conn)
         return result
